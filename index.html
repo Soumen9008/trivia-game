@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Two-Player Trivia Battle</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="game-container">
+        <div class="header">
+            <h1>Trivia Battle</h1>
+            <p>Two-Player Quiz Competition</p>
+        </div>
+
+        <!-- Player Setup Section -->
+        <div class="game-section active" id="player-setup">
+            <div class="player-setup">
+                <h2>Enter Player Names</h2>
+                <div class="player-inputs">
+                    <div class="player-input">
+                        <label for="player1-name">Player 1 Name:</label>
+                        <input type="text" id="player1-name" placeholder="Enter Player 1 name" maxlength="20">
+                    </div>
+                    <div class="player-input">
+                        <label for="player2-name">Player 2 Name:</label>
+                        <input type="text" id="player2-name" placeholder="Enter Player 2 name" maxlength="20">
+                    </div>
+                </div>
+                <button class="btn" onclick="startGame()">Start Game</button>
+            </div>
+        </div>
+
+        <!-- Category Selection Section -->
+        <div class="game-section" id="category-selection">
+            <h2>Choose a Category</h2>
+            <div id="categories-container">
+                <div class="loading">
+                    <div class="spinner"></div>
+                    <p>Loading categories...</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Game Play Section -->
+        <div class="game-section" id="gameplay">
+            <div class="score-display">
+                <div class="player-score" id="player1-score">
+                    <div class="player-name" id="player1-display"></div>
+                    <div class="player-points" id="player1-points">0</div>
+                </div>
+                <div class="player-score" id="player2-score">
+                    <div class="player-name" id="player2-display"></div>
+                    <div class="player-points" id="player2-points">0</div>
+                </div>
+            </div>
+
+            <div class="question-card" id="question-container">
+                <!-- Question will be populated here -->
+            </div>
+
+            <div class="game-controls" id="question-controls" style="display: none;">
+                <button class="btn" onclick="nextQuestion()">Next Question</button>
+            </div>
+        </div>
+
+        <!-- Game End Section -->
+        <div class="game-section" id="game-end">
+            <div class="winner-display">
+                <h2 id="winner-text">Winner!</h2>
+                <div class="final-scores">
+                    <div class="final-score" id="final-player1">
+                        <div class="player-name" id="final-player1-name"></div>
+                        <div class="player-points" id="final-player1-points"></div>
+                    </div>
+                    <div class="final-score" id="final-player2">
+                        <div class="player-name" id="final-player2-name"></div>
+                        <div class="player-points" id="final-player2-points"></div>
+                    </div>
+                </div>
+                <div class="game-controls">
+                    <button class="btn" onclick="selectNewCategory()">Play Another Category</button>
+                    <button class="btn" onclick="restartGame()">New Game</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
