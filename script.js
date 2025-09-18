@@ -333,10 +333,21 @@ const TriviaGame = (() => {
     });
 
       const quitGame = () => {
-        // End the game immediately and show winner based on current scores
         state.phase = 'finished';
         endGame();
     };
+
+    const playAnotherCategory = () => {
+    const available = state.categories.filter(cat => !state.usedCategories.has(cat.id));
+    
+    if (available.length === 0) {
+        restart();
+    } else {
+        state.phase = 'category';
+        displayCategories();
+        dom.show('category-selection');
+    }
+};
 
 
     // Public API
@@ -345,6 +356,7 @@ const TriviaGame = (() => {
     window.restartGame = restart;
     window.selectCategory = selectCategory;
     window.quitGame = quitGame;
+    window.playAnotherCategory = playAnotherCategory;
     
     return { start: startGame, next: nextQuestion, restart, retry: () => state.retryFn?.() };
 })();
