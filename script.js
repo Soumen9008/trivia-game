@@ -234,14 +234,14 @@ const TriviaGame = (() => {
         state.phase = 'finished';
         const [p1, p2] = state.players;
         
-        let winner = "🤝 It's a Tie!";
+        let winner = "It's a Tie!";
         let p1Winner = false, p2Winner = false;
         
         if (p1.score > p2.score) {
-            winner = `🏆 ${p1.name} Wins!`;
+            winner = `${p1.name} Wins!`;
             p1Winner = true;
         } else if (p2.score > p1.score) {
-            winner = `🏆 ${p2.name} Wins!`;
+            winner = `${p2.name} Wins!`;
             p2Winner = true;
         }
 
@@ -332,11 +332,19 @@ const TriviaGame = (() => {
         });
     });
 
+      const quitGame = () => {
+        // End the game immediately and show winner based on current scores
+        state.phase = 'finished';
+        endGame();
+    };
+
+
     // Public API
     window.startGame = startGame;
     window.nextQuestion = nextQuestion;
     window.restartGame = restart;
     window.selectCategory = selectCategory;
+    window.quitGame = quitGame;
     
     return { start: startGame, next: nextQuestion, restart, retry: () => state.retryFn?.() };
 })();
