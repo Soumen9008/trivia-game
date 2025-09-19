@@ -219,7 +219,15 @@ const TriviaGame = (() => {
         if (available.length === 0) {
             endGame();
         } else {
-            const proceed = confirm(`Category "${state.currentCategory}" completed!\n\nPlay another category?`);
+            // Format the category name to be more readable
+            const formattedCategory = state.currentCategory
+                .replace(/_/g, ' ')  // Replace underscores with spaces
+                .replace(/,/g, ', ') // Add space after commas
+                .split(' ')
+                .map(word => word.charAt(0).toUpperCase() + word.slice(1)) // Capitalize each word
+                .join(' ');
+                
+            const proceed = confirm(`Category "${formattedCategory}" completed!\n\nPlay another category?`);
             if (proceed) {
                 state.phase = 'category';
                 displayCategories();
@@ -332,23 +340,22 @@ const TriviaGame = (() => {
         });
     });
 
-      const quitGame = () => {
-        state.phase = 'finished';
-        endGame();
+    const quitGame = () => {
+        // Simply restart the game instead of calling endGame again
+        restart();
     };
 
     const playAnotherCategory = () => {
-    const available = state.categories.filter(cat => !state.usedCategories.has(cat.id));
-    
-    if (available.length === 0) {
-        restart();
-    } else {
-        state.phase = 'category';
-        displayCategories();
-        dom.show('category-selection');
-    }
-};
-
+        const available = state.categories.filter(cat => !state.usedCategories.has(cat.id));
+        
+        if (available.length === 0) {
+            restart();
+        } else {
+            state.phase = 'category';
+            displayCategories();
+            dom.show('category-selection');
+        }
+    };
 
     // Public API
     window.startGame = startGame;
@@ -362,5 +369,3 @@ const TriviaGame = (() => {
 })();
 
 const triviaGame = TriviaGame;
-
-
