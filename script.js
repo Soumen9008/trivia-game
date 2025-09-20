@@ -110,7 +110,12 @@ const TriviaGame = (() => {
             </div>`
         ).join('');
 
-        container.innerHTML = `<div class="categories-grid">${html}</div>`;
+         container.innerHTML = `
+        <div class="categories-grid">${html}</div>
+        <div class="game-controls">
+            <button class="btn" onclick="quitGame()">Quit Game</button>
+        </div>
+    `;
     };
 
     const selectCategory = async (categoryId, categoryName) => {
@@ -219,12 +224,11 @@ const TriviaGame = (() => {
         if (available.length === 0) {
             endGame();
         } else {
-            // Format the category name to be more readable
             const formattedCategory = state.currentCategory
-                .replace(/_/g, ' ')  // Replace underscores with spaces
-                .replace(/,/g, ', ') // Add space after commas
+                .replace(/_/g, ' ')  
+                .replace(/,/g, ', ') 
                 .split(' ')
-                .map(word => word.charAt(0).toUpperCase() + word.slice(1)) // Capitalize each word
+                .map(word => word.charAt(0).toUpperCase() + word.slice(1)) 
                 .join(' ');
                 
             const proceed = confirm(`Category "${formattedCategory}" completed!\n\nPlay another category?`);
@@ -341,7 +345,6 @@ const TriviaGame = (() => {
     });
 
     const quitGame = () => {
-        // Simply restart the game instead of calling endGame again
         restart();
     };
 
